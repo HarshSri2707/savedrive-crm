@@ -265,9 +265,11 @@ export default function Hero({ data, site }) {
           </motion.h1>
 
           {/* Description — desktop position (hidden on mobile; re-shown after the form below) */}
-          <motion.p className="text-white/[0.7] text-[0.95rem] leading-[1.65] mb-[1.5rem] max-w-[430px] max-[860px]:max-w-full max-[860px]:hidden" {...fadeUp(0.3)}>
-            {data.description}
-          </motion.p>
+          <motion.div className="text-white/[0.7] text-[0.95rem] leading-[1.65] mb-[1.5rem] max-w-[430px] max-[860px]:max-w-full max-[860px]:hidden" {...fadeUp(0.3)}>
+            {data.description.split(/\n{2,}/).map((para, i) => (
+              <p key={i} className="[&:not(:last-child)]:mb-[0.9rem]">{para}</p>
+            ))}
+          </motion.div>
 
           <motion.ul className="flex flex-col gap-[0.55rem] mb-[1.75rem] max-[860px]:hidden" {...fadeUp(0.38)}>
             {data.bullets.map((b, i) => (
@@ -296,10 +298,10 @@ export default function Hero({ data, site }) {
           {/* Secured By — trust badges (desktop) */}
           <motion.div className="mt-[1.4rem] max-[860px]:hidden" {...fadeUp(0.54)}>
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-white/40 mb-[0.55rem]">Secured By</p>
-            <div className="flex items-center gap-[0.5rem] flex-wrap">
+            <div className="flex items-center gap-[0.9rem] flex-wrap max-w-full">
               {trustBadges.map((b, i) => (
-                <span key={i} className="bg-white rounded-[7px] h-[36px] px-[0.5rem] flex items-center shadow-[0_3px_12px_rgba(0,0,0,0.18)]">
-                  <img src={b.src} alt={b.alt} className="h-[22px] w-auto object-contain" />
+                <span key={i} className="flex items-center">
+                  <img src={b.src} alt={b.alt} className="h-[38px] w-auto object-contain" />
                 </span>
               ))}
             </div>
@@ -468,7 +470,7 @@ export default function Hero({ data, site }) {
                 />
                 <span className="text-[0.72rem] text-[var(--gray-500)] leading-[1.55]">
                   By clicking submit, I agree to the{" "}
-                  <a href="#" className="text-[var(--teal)] underline">Terms of Service</a> and <a href="#" className="text-[var(--teal)] underline">Privacy Policy</a>.
+                  <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-[var(--teal)] underline">Terms of Service</a> and <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[var(--teal)] underline">Privacy Policy</a>.
                   I grant express written consent for SaveDriveQuotes and its{" "}
                   <a href="#" className="text-[var(--teal)] underline">trusted third-party insurance partners</a> to contact me
                   regarding my insurance request via automated or prerecorded calls,
@@ -524,12 +526,14 @@ export default function Hero({ data, site }) {
         </motion.div>
 
         {/* Description — mobile position (shown after the form so order is Heading → Form → Paragraph) */}
-        <motion.p
+        <motion.div
           className="hidden max-[860px]:block text-white/[0.7] text-[0.95rem] leading-[1.65] mt-7 w-full max-w-[520px] mx-auto"
           {...fadeUp(0.4)}
         >
-          {data.description}
-        </motion.p>
+          {data.description.split(/\n{2,}/).map((para, i) => (
+            <p key={i} className="[&:not(:last-child)]:mb-[0.9rem]">{para}</p>
+          ))}
+        </motion.div>
 
         {/* ── Mobile Stats (appears below form on mobile) ── */}
         <motion.div
@@ -547,10 +551,10 @@ export default function Hero({ data, site }) {
         {/* Secured By — trust badges (mobile) */}
         <div className="hidden max-[860px]:flex flex-col items-center mt-6">
           <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-white/40 mb-[0.55rem]">Secured By</p>
-          <div className="flex items-center justify-center gap-[0.5rem] flex-wrap">
+          <div className="flex items-center justify-center gap-[0.7rem] flex-wrap">
             {trustBadges.map((b, i) => (
-              <span key={i} className="bg-white rounded-[7px] h-[36px] px-[0.5rem] flex items-center shadow-[0_3px_12px_rgba(0,0,0,0.18)]">
-                <img src={b.src} alt={b.alt} className="h-[22px] w-auto object-contain" />
+              <span key={i} className="flex items-center">
+                <img src={b.src} alt={b.alt} className="h-[30px] w-auto object-contain" />
               </span>
             ))}
           </div>

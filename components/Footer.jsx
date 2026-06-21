@@ -56,7 +56,7 @@ export default function Footer({ data, site }) {
         <div className="w-full max-w-[80rem] mx-auto px-6 max-[768px]:px-4">
           <p className="text-[0.78rem] text-white/[0.3] leading-[1.6]">
             <strong className="text-white/[0.4] font-semibold">Note: </strong>
-            "All Brand Logos Displayed Are The Property Of Their Respective Owners And Are Used For Identification Purposes Only"
+            &quot;All Brand Logos Displayed Are The Property Of Their Respective Owners And Are Used For Identification Purposes Only&quot;
           </p>
         </div>
       </div>

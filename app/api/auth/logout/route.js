@@ -1,16 +1,11 @@
 import { NextResponse } from "next/server";
-import { AUTH_COOKIE } from "@/lib/auth";
+import { AUTH_COOKIE, clearCookieOptions } from "@/lib/auth";
 
 // POST /api/auth/logout
-// Clears the admin session cookie.
+// Clears the admin session cookie. Uses the shared clear options so the cookie
+// attributes always match the ones used at login (required for reliable clearing).
 export async function POST() {
   const res = NextResponse.json({ success: true });
-  res.cookies.set(AUTH_COOKIE, "", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    maxAge: 0,
-  });
+  res.cookies.set(AUTH_COOKIE, "", clearCookieOptions);
   return res;
 }
