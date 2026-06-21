@@ -237,16 +237,16 @@ export default function Hero({ data, site }) {
 
   return (
     <section className="relative min-h-screen bg-[#0B2537] flex items-center pt-[7rem] pb-16 overflow-hidden max-[860px]:pt-24 max-[860px]:pb-12" id="home">
-      {/* Background image — very subtle car + shield watermark */}
+      {/* Background image — vehicles kept visible (balanced like the Contact page) */}
       <img
         src="/images/BG.png"
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.16]"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.5]"
       />
-      {/* Dark premium overlay */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-[#0A2436]/90 via-[#0B2537]/92 to-[#06121C]/96" />
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_18%_42%,rgba(13,148,136,0.15)_0%,transparent_55%),radial-gradient(ellipse_at_88%_6%,rgba(249,115,22,0.06)_0%,transparent_45%)]" />
+      {/* Balanced overlay — darker on the left for text legibility, lighter on the right so the vehicles stay visible */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#0B2537]/82 via-[#0B2537]/66 to-[#0B2537]/56" />
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_18%_42%,rgba(13,148,136,0.12)_0%,transparent_55%),radial-gradient(ellipse_at_88%_6%,rgba(249,115,22,0.06)_0%,transparent_45%)]" />
       <div className="absolute bottom-0 left-0 right-0 h-[180px] pointer-events-none bg-[linear-gradient(to_top,rgba(11,37,55,0.7),transparent)]" />
 
       <div className="w-full max-w-[78rem] mx-auto px-6 max-[768px]:px-4 grid grid-cols-[1.2fr_0.95fr] gap-16 items-start relative z-[1] max-[1060px]:gap-10 max-[860px]:grid-cols-[1fr] max-[860px]:gap-8">
@@ -264,7 +264,8 @@ export default function Hero({ data, site }) {
             <span className="text-[var(--orange)]">{data.headline2}</span>
           </motion.h1>
 
-          <motion.p className="text-white/[0.7] text-[0.95rem] leading-[1.65] mb-[1.5rem] max-w-[430px] max-[860px]:max-w-full" {...fadeUp(0.3)}>
+          {/* Description — desktop position (hidden on mobile; re-shown after the form below) */}
+          <motion.p className="text-white/[0.7] text-[0.95rem] leading-[1.65] mb-[1.5rem] max-w-[430px] max-[860px]:max-w-full max-[860px]:hidden" {...fadeUp(0.3)}>
             {data.description}
           </motion.p>
 
@@ -521,6 +522,14 @@ export default function Hero({ data, site }) {
             </form>
           )}
         </motion.div>
+
+        {/* Description — mobile position (shown after the form so order is Heading → Form → Paragraph) */}
+        <motion.p
+          className="hidden max-[860px]:block text-white/[0.7] text-[0.95rem] leading-[1.65] mt-7 w-full max-w-[520px] mx-auto"
+          {...fadeUp(0.4)}
+        >
+          {data.description}
+        </motion.p>
 
         {/* ── Mobile Stats (appears below form on mobile) ── */}
         <motion.div
