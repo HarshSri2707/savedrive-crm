@@ -1,9 +1,47 @@
 import "./globals.css";
+import content from "@/data/content.json";
+import { SITE_URL } from "@/lib/site";
+
+const DEFAULT_DESCRIPTION =
+  "Compare cheap car insurance quotes from 50+ top-rated insurers instantly. 100% free, no credit check, no obligation. Drivers save an average of $700/year.";
 
 export const metadata = {
-  title: "SaveDriveQuotes — Cheap Car Insurance Quotes, Compare & Save up to $700/yr",
-  description:
-    "Compare cheap car insurance quotes from 50+ top-rated insurers instantly. 100% free, no credit check, no obligation. Drivers save an average of $700/year.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default:
+      "SaveDriveQuotes — Cheap Car Insurance Quotes, Compare & Save up to $700/yr",
+    template: "%s | SaveDriveQuotes",
+  },
+  description: DEFAULT_DESCRIPTION,
+  applicationName: content.site.name,
+  keywords: [
+    "car insurance quotes",
+    "cheap car insurance",
+    "compare car insurance",
+    "auto insurance",
+    "free insurance quotes",
+    "insurance comparison",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  openGraph: {
+    type: "website",
+    siteName: content.site.name,
+    title:
+      "SaveDriveQuotes — Cheap Car Insurance Quotes, Compare & Save up to $700/yr",
+    description: DEFAULT_DESCRIPTION,
+    url: SITE_URL,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "SaveDriveQuotes — Cheap Car Insurance Quotes, Compare & Save up to $700/yr",
+    description: DEFAULT_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }) {

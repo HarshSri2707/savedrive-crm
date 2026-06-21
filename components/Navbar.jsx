@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar({ site }) {
@@ -25,7 +26,7 @@ export default function Navbar({ site }) {
     >
       <div className="w-full max-w-[80rem] mx-auto px-6 max-[768px]:px-4 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 no-underline">
+        <Link href="/" className="flex items-center gap-2 no-underline">
           <span className="w-[34px] h-[34px] bg-[var(--teal)] rounded-[8px] flex items-center justify-center shrink-0">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
@@ -37,7 +38,7 @@ export default function Navbar({ site }) {
             <span className="text-[var(--teal)]">Drive</span>
             <span className="text-white">Quotes</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop */}
         <div className="flex items-center gap-5">
@@ -49,9 +50,9 @@ export default function Navbar({ site }) {
             SSL Secured
           </span>
           
-          <a href="/#hero-form" className="inline-flex items-center justify-center gap-2 bg-[var(--orange)] text-white font-bold text-[0.88rem] py-[0.6rem] px-[1.4rem] rounded-full tracking-[0.01em] shadow-[0_4px_18px_rgba(249,115,22,0.38)] no-underline [transition:background_0.2s_ease,transform_0.15s_ease,box-shadow_0.2s_ease] hover:bg-[var(--orange-dark)] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(249,115,22,0.45)] active:translate-y-0 max-[768px]:hidden">
+          <Link href="/#hero-form" className="inline-flex items-center justify-center gap-2 bg-[var(--orange)] text-white font-bold text-[0.88rem] py-[0.6rem] px-[1.4rem] rounded-full tracking-[0.01em] shadow-[0_4px_18px_rgba(249,115,22,0.38)] no-underline [transition:background_0.2s_ease,transform_0.15s_ease,box-shadow_0.2s_ease] hover:bg-[var(--orange-dark)] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(249,115,22,0.45)] active:translate-y-0 max-[768px]:hidden">
             Get Free Quote
-          </a>
+          </Link>
         </div>
 
         {/* Hamburger */}
@@ -74,9 +75,9 @@ export default function Navbar({ site }) {
           >
             
             <div className="pt-3 px-5 pb-5">
-              <a href="/#hero-form" className="inline-flex items-center justify-center gap-2 bg-[var(--orange)] text-white font-bold text-[1rem] py-[0.9rem] px-8 rounded-full tracking-[0.01em] shadow-[0_4px_18px_rgba(249,115,22,0.38)] no-underline [transition:background_0.2s_ease,transform_0.15s_ease,box-shadow_0.2s_ease] hover:bg-[var(--orange-dark)] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(249,115,22,0.45)] active:translate-y-0 w-full" onClick={() => setMenuOpen(false)}>
+              <Link href="/#hero-form" className="inline-flex items-center justify-center gap-2 bg-[var(--orange)] text-white font-bold text-[1rem] py-[0.9rem] px-8 rounded-full tracking-[0.01em] shadow-[0_4px_18px_rgba(249,115,22,0.38)] no-underline [transition:background_0.2s_ease,transform_0.15s_ease,box-shadow_0.2s_ease] hover:bg-[var(--orange-dark)] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(249,115,22,0.45)] active:translate-y-0 w-full" onClick={() => setMenuOpen(false)}>
                 Get Free Quote
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}
