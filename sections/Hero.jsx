@@ -581,6 +581,7 @@ export default function Hero({ data, site }) {
   const [agreed, setAgreed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   // ── ZIP -> city/state auto-lookup ──
   const [zipInfo, setZipInfo] = useState(null); // { city, state, stateCode }
@@ -677,9 +678,10 @@ export default function Hero({ data, site }) {
     setForm({ ...form, phone: digitsOnly });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setEmailTouched(true);
+    setSubmitError("");
 
     if (!isValidEmail(form.email)) {
       setEmailError("Please enter a valid email address");
@@ -699,11 +701,30 @@ export default function Hero({ data, site }) {
     setEmailSuggestion(null);
 
     if (!agreed) return;
+
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          zipCode: form.zip,
+          city: zipInfo?.city || "",
+          state: zipInfo?.state || "",
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+
       setSubmitted(true);
-    }, 1800);
+    } catch {
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -941,6 +962,10 @@ export default function Hero({ data, site }) {
                   </>
                 )}
               </button>
+
+              {submitError && (
+                <p className="text-[0.72rem] text-red-500 text-center mt-[0.1rem]">{submitError}</p>
+              )}
 
               <p className="flex items-center justify-center gap-[0.3rem] text-[0.72rem] text-[var(--gray-400)] text-center">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
