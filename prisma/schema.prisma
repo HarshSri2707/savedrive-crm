@@ -35,3 +35,12 @@ model Lead {
   status    LeadStatus @default(NEW)
   createdAt DateTime   @default(now())
 }
+
+model Contact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  createdAt DateTime @default(now())
+}

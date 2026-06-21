@@ -1,7 +1,14 @@
 "use client";
 import { useEffect } from "react";
 
-export default function ConfirmDeleteModal({ onConfirm, onCancel, loading, error }) {
+export default function ConfirmDeleteModal({
+  onConfirm,
+  onCancel,
+  loading,
+  error,
+  title = "Delete Lead",
+  message = "Are you sure you want to delete this lead?",
+}) {
   // Close on ESC (unless a delete is in flight).
   useEffect(() => {
     const onKey = (e) => {
@@ -23,10 +30,10 @@ export default function ConfirmDeleteModal({ onConfirm, onCancel, loading, error
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-[1.15rem] font-extrabold text-[var(--gray-900)] tracking-[-0.02em] mb-2">
-          Delete Lead
+          {title}
         </h2>
         <p className="text-[0.9rem] text-[var(--gray-500)] leading-[1.6] mb-1">
-          Are you sure you want to delete this lead?
+          {message}
         </p>
 
         {error && (

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { AUTH_COOKIE, verifyToken } from "@/lib/auth";
 
 // Routes that require a valid admin session.
-const PROTECTED_PREFIXES = ["/admin/dashboard", "/admin/leads"];
+const PROTECTED_PREFIXES = ["/admin/dashboard", "/admin/leads", "/admin/contacts"];
 
 export async function middleware(request) {
   const { pathname } = request.nextUrl;
@@ -27,5 +27,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/admin/dashboard/:path*", "/admin/leads/:path*"],
+  matcher: ["/admin/dashboard/:path*", "/admin/leads/:path*", "/admin/contacts/:path*"],
 };

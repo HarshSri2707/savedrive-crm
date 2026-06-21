@@ -28,16 +28,102 @@ function renderTealHeadline(text) {
   );
 }
 
+// ── Validation helpers ──
+const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+const isValidPhone = (v) => /^\d{10}$/.test(v); // exactly 10 digits when provided
+const MAX_WORDS = 250;
+const countWords = (v) => {
+  const t = (v || "").trim();
+  return t ? t.split(/\s+/).length : 0;
+};
+
 export default function ContactPage() {
   const { hero, site, footer } = content;
 
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  // Placeholder submit — intentionally NOT connected to the CRM/lead API.
-  const handleSubmit = (e) => {
+  const handleEmailChange = (e) => {
+    setForm((f) => ({ ...f, email: e.target.value }));
+    if (emailError) setEmailError("");
+  };
+  const handleEmailBlur = () => {
+    setEmailError(
+      form.email && !isValidEmail(form.email)
+        ? "Please enter a valid email address"
+        : ""
+    );
+  };
+
+  // Phone: digits only, max 15.
+  const handlePhoneChange = (e) => {
+    const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
+    setForm((f) => ({ ...f, phone: digits }));
+    if (phoneError) setPhoneError("");
+  };
+  const handlePhoneBlur = () => {
+    setPhoneError(
+      form.phone && !isValidPhone(form.phone)
+        ? "Please enter a valid 10-digit phone number"
+        : ""
+    );
+  };
+
+  // Message: cap at 250 words (extra words are dropped as you type).
+  const handleMessageChange = (e) => {
+    const val = e.target.value;
+    const words = val.trim() ? val.trim().split(/\s+/) : [];
+    const next = words.length > MAX_WORDS ? words.slice(0, MAX_WORDS).join(" ") : val;
+    setForm((f) => ({ ...f, message: next }));
+  };
+
+  const wordCount = countWords(form.message);
+
+  // Button is enabled only when name, a valid email and a message are present.
+  const canSubmit =
+    form.name.trim() !== "" &&
+    isValidEmail(form.email) &&
+    form.message.trim() !== "";
+
+  // Submit the contact form to the dedicated contact endpoint (not the lead CRM).
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+
+    // Final validation gate.
+    let ok = true;
+    if (!isValidEmail(form.email)) {
+      setEmailError("Please enter a valid email address");
+      ok = false;
+    }
+    if (form.phone && !isValidPhone(form.phone)) {
+      setPhoneError("Please enter a valid 10-digit phone number");
+      ok = false;
+    }
+    if (!form.name.trim() || !form.message.trim()) ok = false;
+    if (!ok) return;
+
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputClass =
@@ -49,16 +135,16 @@ export default function ContactPage() {
 
       <main>
         <section className="relative min-h-screen bg-[#0B2537] flex items-center pt-[7rem] pb-16 overflow-hidden max-[860px]:pt-24 max-[860px]:pb-12">
-          {/* Background image — kept light so the vehicles stay visible */}
+          {/* Background image — darker now, but vehicles still visible */}
           <img
             src="/images/BG.png"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.78]"
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-[0.5]"
           />
-          {/* Subtle overlay only — gently darker on the left for legibility, lighter on the right so the vehicles stay clearly visible */}
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#0B2537]/55 via-[#0B2537]/28 to-[#0B2537]/16" />
-          <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_18%_42%,rgba(13,148,136,0.1)_0%,transparent_55%)]" />
+          {/* Darker premium overlay — keeps the section moody like the homepage hero */}
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#0B2537]/82 via-[#0B2537]/66 to-[#0B2537]/56" />
+          <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_18%_42%,rgba(13,148,136,0.12)_0%,transparent_55%)]" />
 
           <div className="w-full max-w-[78rem] mx-auto px-6 max-[768px]:px-4 grid grid-cols-[1.2fr_0.95fr] gap-16 items-start relative z-[1] max-[1060px]:gap-10 max-[860px]:grid-cols-[1fr] max-[860px]:gap-8">
 
@@ -131,14 +217,21 @@ export default function ContactPage() {
 
               {submitted ? (
                 <motion.div
-                  className="text-center pt-6 pb-4 px-2"
-                  initial={{ opacity: 0, scale: 0.92 }}
+                  className="text-center pt-4 pb-2 px-1"
+                  initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4 }}
                 >
-                  <div className="w-[56px] h-[56px] bg-[var(--teal)] rounded-full text-white text-[1.6rem] flex items-center justify-center mx-auto mb-4">✓</div>
-                  <h3 className="text-[1.1rem] font-bold mb-[0.4rem] text-[var(--gray-900)]">Thanks for reaching out!</h3>
-                  <p className="text-[0.88rem] text-[var(--gray-500)]">We&rsquo;ll get back to you shortly.</p>
+                  <div className="w-[58px] h-[58px] bg-[var(--teal)] rounded-full text-white text-[1.7rem] flex items-center justify-center mx-auto mb-4">✓</div>
+                  <h3 className="text-[1.15rem] font-bold mb-[0.5rem] text-[var(--gray-900)]">Great News!</h3>
+                  <p className="text-[0.92rem] font-semibold text-[var(--gray-800)] mb-[0.6rem]">
+                    Your quote request has been submitted successfully.
+                  </p>
+                  <p className="text-[0.85rem] text-[var(--gray-500)] leading-[1.6]">
+                    Our team is now searching for competitive auto insurance options
+                    that could help you save on coverage. Be ready to review your
+                    personalized quotes and choose the policy that fits your needs.
+                  </p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-[0.85rem]">
@@ -146,37 +239,79 @@ export default function ContactPage() {
                     type="text" placeholder="Full Name" required
                     className={inputClass}
                     value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                   />
-                  <input
-                    type="email" placeholder="Email Address" required
-                    className={inputClass}
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  />
-                  <input
-                    type="tel" placeholder="Phone Number" required
-                    className={inputClass}
-                    value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  />
-                  <textarea
-                    placeholder="Write your message" required rows={4}
-                    className={`${inputClass} resize-none`}
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  />
+
+                  {/* Email */}
+                  <div>
+                    <input
+                      type="email" placeholder="Email Address" required
+                      className={inputClass}
+                      value={form.email}
+                      onChange={handleEmailChange}
+                      onBlur={handleEmailBlur}
+                    />
+                    {emailError && (
+                      <p className="text-[0.72rem] text-red-500 mt-[0.3rem] ml-[0.2rem]">{emailError}</p>
+                    )}
+                  </div>
+
+                  {/* Phone (optional) */}
+                  <div>
+                    <input
+                      type="tel" inputMode="numeric" placeholder="Phone Number"
+                      className={inputClass}
+                      value={form.phone}
+                      onChange={handlePhoneChange}
+                      onBlur={handlePhoneBlur}
+                    />
+                    {phoneError && (
+                      <p className="text-[0.72rem] text-red-500 mt-[0.3rem] ml-[0.2rem]">{phoneError}</p>
+                    )}
+                  </div>
+
+                  {/* Message */}
+                  <div>
+                    <textarea
+                      placeholder="Write your message" required rows={4}
+                      className={`${inputClass} resize-none`}
+                      value={form.message}
+                      onChange={handleMessageChange}
+                    />
+                    <p
+                      className={`text-[0.7rem] mt-[0.3rem] text-right ${
+                        wordCount >= MAX_WORDS ? "text-red-500" : "text-[var(--gray-400)]"
+                      }`}
+                    >
+                      {wordCount} / {MAX_WORDS} words
+                    </p>
+                  </div>
 
                   <button
                     type="submit"
-                    className="w-full py-[0.9rem] px-4 rounded-[10px] text-white text-[0.95rem] font-bold flex items-center justify-center gap-2 bg-[var(--gray-300)] cursor-pointer [transition:background_0.2s,transform_0.15s] hover:bg-[var(--gray-400)] active:translate-y-px"
+                    disabled={!canSubmit || loading}
+                    className={`w-full py-[0.95rem] px-4 rounded-full text-white text-[0.98rem] font-bold flex items-center justify-center gap-2 [transition:background_0.2s,transform_0.15s,box-shadow_0.2s] ${
+                      canSubmit
+                        ? "bg-[var(--orange)] cursor-pointer shadow-[0_4px_18px_rgba(249,115,22,0.4)] hover:bg-[var(--orange-dark)] hover:-translate-y-px"
+                        : "bg-[var(--gray-300)] cursor-not-allowed"
+                    }`}
                   >
-                    Submit
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                      <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor"
-                        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                    {loading ? (
+                      <span className="w-5 h-5 border-2 border-[rgba(255,255,255,0.35)] border-t-white rounded-full animate-[spin_0.7s_linear_infinite] inline-block" />
+                    ) : (
+                      <>
+                        Submit
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                          <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor"
+                            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </>
+                    )}
                   </button>
+
+                  {error && (
+                    <p className="text-[0.72rem] text-red-500 text-center mt-[0.1rem]">{error}</p>
+                  )}
 
                   <p className="flex items-center justify-center gap-[0.3rem] text-[0.72rem] text-[var(--gray-400)] text-center mt-[0.1rem]">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none">

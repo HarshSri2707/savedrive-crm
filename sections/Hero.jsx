@@ -335,8 +335,15 @@ export default function Hero({ data, site }) {
               transition={{ duration: 0.4 }}
             >
               <div className="w-[58px] h-[58px] bg-[var(--teal)] rounded-full text-white text-[1.7rem] flex items-center justify-center mx-auto mb-4">✓</div>
-              <h3 className="text-[1.15rem] font-bold mb-[0.4rem] text-[var(--gray-900)]">You&apos;re all set!</h3>
-              <p className="text-[0.88rem] text-[var(--gray-500)]">We&apos;re finding your best rates now. Check your email shortly.</p>
+              <h3 className="text-[1.15rem] font-bold mb-[0.5rem] text-[var(--gray-900)]">Great News!</h3>
+              <p className="text-[0.92rem] font-semibold text-[var(--gray-800)] mb-[0.6rem]">
+                Your quote request has been submitted successfully.
+              </p>
+              <p className="text-[0.85rem] text-[var(--gray-500)] leading-[1.6]">
+                Our team is now searching for competitive auto insurance options
+                that could help you save on coverage. Be ready to review your
+                personalized quotes and choose the policy that fits your needs.
+              </p>
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-[0.7rem]">

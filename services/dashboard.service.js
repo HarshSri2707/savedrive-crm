@@ -15,6 +15,9 @@ export async function getDashboardStats() {
     qualifiedLeads,
     closedLeads,
     latestLeads,
+    totalContacts,
+    todayContacts,
+    latestContacts,
   ] = await Promise.all([
     prisma.lead.count(),
     prisma.lead.count({ where: { createdAt: { gte: startOfToday } } }),
@@ -34,6 +37,19 @@ export async function getDashboardStats() {
         createdAt: true,
       },
     }),
+    prisma.contact.count(),
+    prisma.contact.count({ where: { createdAt: { gte: startOfToday } } }),
+    prisma.contact.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 10,
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        phone: true,
+        createdAt: true,
+      },
+    }),
   ]);
 
   return {
@@ -44,5 +60,8 @@ export async function getDashboardStats() {
     qualifiedLeads,
     closedLeads,
     latestLeads,
+    totalContacts,
+    todayContacts,
+    latestContacts,
   };
 }
