@@ -18,7 +18,6 @@ export default function Home() {
         <Partners data={content.partners} />
         <HowItWorks data={content.howItWorks} />
         <WhyUs data={content.whyUs} stats={content.stats} reviews={content.reviews} />
-        <Savings data={content.savings} />
         <FAQ data={content.faq} />
         <CTASection data={content.cta} site={content.site} />
       </main>

@@ -1,24 +1,21 @@
 {
   "site": {
     "name": "SaveDriveQuotes",
-    "phone": "1-800-555-0123",
     "tagline": "The smarter way to compare car insurance quotes from 50+ top-rated providers."
   },
   "hero": {
-    "badge": "Over 2 Million Drivers Compared",
-    "headline1": "Cheap Car Insurance",
-    "headline2": "Quotes",
-    "headline3": "— Compare &",
-    "headline4": "Save up to $700/yr",
-    "description": "Stop overpaying. In just 2 minutes, compare real quotes from 50+ top-rated insurers and lock in a better rate today.",
+    "badge": "Over 2 Million Drivers Insured",
+    "headline1": "Find the Right Auto Insurance &",
+    
+    "headline2": "Unlock Savings up to $700",
+    "description": "Looking for dependable auto insurance at a competitive price? You’ve come to the right place. At SaveDriveQuotes, we help drivers explore coverage options that match their needs while identifying opportunities to save on their insurance costs.Complete the form to get started and discover coverage solutions designed to keep you protected on the road without paying more than necessary.",
     "bullets": [
-      "No credit check required",
-      "Compare 50+ top insurers instantly",
-      "100% free — no obligation",
-      "Average savings of $700/year"
+     "Access competitive insurance rates and potential savings",
+     "Explore coverage options tailored to your unique needs",
+     "Find the right balance of protection, value, and affordability"
     ],
     "stats": [
-      { "value": "2M+", "label": "Drivers Compared" },
+      { "value": "2M+", "label": "Drivers Insured" },
       { "value": "$700", "label": "Avg. Annual Savings" },
       { "value": "4.8★", "label": "Customer Rating" }
     ],
@@ -40,7 +37,7 @@
   },
   "partners": {
     "badge": "OUR PARTNERS",
-    "heading": "We Compare 50+ Top-Rated Insurers",
+    "heading": "Our Top-Rated Insurers",
     "list": [
     { 
       "name": "Allstate", 
@@ -92,31 +89,33 @@
     }
   ]
   },
+  
   "howItWorks": {
-    "badge": "SIMPLE PROCESS",
-    "heading": "How It Works",
-    "subheading": "Three easy steps to better car insurance. No phone calls, no paperwork.",
+    "badge": "DISCOUNTS THAT MAKE AUTO INSURANCE AFFORDABLE",
+    "heading": "Save More on Your Auto Insurance",
+    "subheading": "Explore these top discounts and start saving today.",
     "steps": [
       {
         "num": 1,
-        "title": "Enter Your Info",
-        "desc": "Provide basic details about yourself and your vehicle in under 2 minutes.",
+        "title": "BUNDLE & SAVE",
+        "desc": "New customers who bundle their home and auto save $1,086 on average.* Combine coverage for your RV, boat, motorcycle, and more for additional multi-policy savings.",
         "icon": "doc"
       },
       {
         "num": 2,
-        "title": "Compare Quotes",
-        "desc": "Instantly see side-by-side quotes from 50+ top-rated insurers.",
-        "icon": "chart"
+        "title": "STUDENTS DISCOUNT",
+        "desc": "Students with a B average or better can earn our good student discount for auto insurance,** plus teens age 18 or younger get a discount too.†",
+        "icon": "badge"
       },
       {
         "num": 3,
-        "title": "Save & Switch",
-        "desc": "Choose the best rate and switch seamlessly. Start saving immediately.",
-        "icon": "badge"
+        "title": "DRIVE SAFE TO SAVE MORE",
+        "desc": "Car insurance based on how you drive. On average, customers save up-to $328 in savings per year.",
+        "icon": "chart"
       }
     ]
   },
+
   "whyUs": {
     "badge": "WHY SAVEDRIVEQUOTES",
     "heading": "The Smarter Way to Buy Car Insurance",
@@ -208,14 +207,7 @@
         "q": "How does SaveDriveQuotes work?",
         "a": "SaveDriveQuotes is a free comparison marketplace. You enter your basic info once, and we instantly match you with quotes from 50+ top-rated insurers so you can compare and choose the best rate."
       },
-      {
-        "q": "Is it really free to compare quotes?",
-        "a": "Yes, 100% free. There are no fees, no subscriptions, and no hidden charges. We're compensated by our insurance partners when you choose a policy — you never pay a cent."
-      },
-      {
-        "q": "Will comparing quotes affect my credit score?",
-        "a": "No. Getting quotes through SaveDriveQuotes does not impact your credit score in any way. We use a soft inquiry at most, which is completely invisible to lenders."
-      },
+  
       {
         "q": "How accurate are the quotes?",
         "a": "Our quotes are real estimates based on your profile from actual insurance carriers. The final rate may vary slightly after a full underwriting review, but we strive to show you the most accurate numbers possible."
@@ -234,32 +226,19 @@
     "badge": "Takes Less Than 2 Minutes",
     "heading1": "Stop Overpaying for",
     "heading2": "Car Insurance",
-    "subtext": "Join 2 million drivers who've already saved an average of $700/year. Your best rate is waiting.",
-    "btnPrimary": "Compare Free Quotes Now",
+    "subtext": "Join 2 million Isured who've already saved an average of $700/year. Your best rate is waiting.",
+    "btnPrimary": "Gets Free Quotes Now",
     "trust": ["SSL Encrypted", "No Obligation", "Trusted by 2M+ Drivers"]
   },
+  
   "footer": {
-    "company": [
-      { "label": "About Us", "href": "#" },
-      { "label": "How It Works", "href": "#how-it-works" },
-      { "label": "Careers", "href": "#" },
-      { "label": "Press", "href": "#" }
-    ],
-    "resources": [
-      { "label": "Insurance Guide", "href": "#" },
-      { "label": "State Requirements", "href": "#" },
-      { "label": "Coverage Types", "href": "#" },
-      { "label": "Savings Tips", "href": "#" },
-      { "label": "Blog", "href": "#" }
-    ],
     "legal": [
-      { "label": "Privacy Policy", "href": "#" },
-      { "label": "Terms of Service", "href": "#" },
-      { "label": "Accessibility", "href": "#" },
-      { "label": "Sitemap", "href": "#" },
-      { "label": "Do Not Sell or Share My Personal Information", "href": "#", "highlight": true }
+      { "label": "Privacy Policy", "href": "/privacy" },
+      { "label": "Terms of Service", "href": "/terms" },
+      { "label": "Contact", "href": "/contact" }
     ],
-    "disclosure": "SaveDriveQuotes is an independent insurance comparison marketplace and lead generation service. We are not a licensed insurance company, agent, or broker. We do not sell insurance policies directly. By submitting your information, you may be matched with one or more licensed third-party insurance providers from our partner network who will contact you about available coverage options. Quoted rates are estimates only and are not a guarantee of final pricing.",
+    "disclosure": "SaveDriveQuotes is an independent insurance comparison marketplace and lead generation service. We are not a licensed insurance company, agent, or broker. We do not sell insurance policies directly. By submitting your information, you may be matched with one or more licensed third-party insurance providers from our partner network who will contact you about available coverage options. Quoted rates are estimates only and are not a guarantee of final pricing. Coverage terms, availability, and final rates are determined solely by the insurer.",
     "copyright": "© 2024 SaveDriveQuotes. All rights reserved."
   }
+ 
 }
