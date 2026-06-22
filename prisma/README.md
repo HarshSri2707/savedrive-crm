@@ -27,12 +27,12 @@ sudo service postgresql start
 Open `psql` (or pgAdmin) and create the database:
 
 ```sql
-CREATE DATABASE savedrivequotes;
+CREATE DATABASE smartcoverauto;
 ```
 
 From the command line you can run:
 ```bash
-psql -U postgres -c "CREATE DATABASE savedrivequotes;"
+psql -U postgres -c "CREATE DATABASE smartcoverauto;"
 ```
 
 ## 3. Configure the connection string
@@ -41,7 +41,7 @@ Copy `.env.example` to `.env` (in the project root) and update `DATABASE_URL`
 with your credentials:
 
 ```env
-DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@localhost:5432/savedrivequotes?schema=public"
+DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@localhost:5432/smartcoverauto?schema=public"
 ```
 
 ## 4. Run the first migration

@@ -495,7 +495,7 @@ export default function Hero({ data, site }) {
                 <span className="text-[0.72rem] text-[var(--gray-500)] leading-[1.55]">
                   By clicking submit, I agree to the{" "}
                   <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-[var(--teal)] underline">Terms of Service</a> and <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[var(--teal)] underline">Privacy Policy</a>.
-                  I grant express written consent for SaveDriveQuotes and its{" "}
+                  I grant express written consent for Smart Cover Auto and its{" "}
                   <a
                     href="#"
                     onClick={(e) => { e.preventDefault(); setPartnersOpen(true); }}

@@ -100,7 +100,7 @@ export default function PartnersModal({ open, onClose }) {
         {/* Footer + action */}
         <div className="px-6 pb-6 pt-2 shrink-0">
           <p className="text-[0.78rem] text-[var(--gray-400)] leading-[1.6] mb-4">
-            Last updated: June 2024. SaveDriveQuotes is an independent lead
+            Last updated: June 2024. Smart Cover Auto is an independent lead
             marketplace, not a licensed insurer or agent. See our{" "}
             <a
               href="/privacy"

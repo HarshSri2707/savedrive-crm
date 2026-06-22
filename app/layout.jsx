@@ -9,8 +9,8 @@ export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default:
-      "SaveDriveQuotes — Cheap Car Insurance Quotes, Compare & Save up to $700/yr",
-    template: "%s | SaveDriveQuotes",
+      "Smart Cover Auto — Cheap Car Insurance Quotes, Compare & Save up to $700/yr",
+    template: "%s | Smart Cover Auto",
   },
   description: DEFAULT_DESCRIPTION,
   applicationName: content.site.name,
@@ -31,7 +31,7 @@ export const metadata = {
     type: "website",
     siteName: content.site.name,
     title:
-      "SaveDriveQuotes — Cheap Car Insurance Quotes, Compare & Save up to $700/yr",
+      "Smart Cover Auto — Cheap Car Insurance Quotes, Compare & Save up to $700/yr",
     description: DEFAULT_DESCRIPTION,
     url: SITE_URL,
     locale: "en_US",
@@ -39,7 +39,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "SaveDriveQuotes — Cheap Car Insurance Quotes, Compare & Save up to $700/yr",
+      "Smart Cover Auto — Cheap Car Insurance Quotes, Compare & Save up to $700/yr",
     description: DEFAULT_DESCRIPTION,
   },
 };

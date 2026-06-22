@@ -16,9 +16,9 @@ export default function Footer({ data, site }) {
               </svg>
             </span>
             <span className="text-[1.1rem] font-extrabold tracking-[-0.02em]">
-              <span className="text-white">Save</span>
-              <span className="text-[var(--teal)]">Drive</span>
-              <span className="text-white">Quotes</span>
+              <span className="text-white">Smart </span>
+              <span className="text-[var(--teal)]">Cover </span>
+              <span className="text-white">Auto</span>
             </span>
           </div>
           <p className="text-[0.82rem] text-white/[0.45] leading-[1.65] max-w-[220px]">{site.tagline}</p>

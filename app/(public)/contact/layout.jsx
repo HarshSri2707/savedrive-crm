@@ -7,18 +7,18 @@ import { SITE_URL } from "@/lib/site";
 export const metadata = {
   title: "Contact Us",
   description:
-    "Have questions about car insurance? Contact the SaveDriveQuotes team — we're here to help you compare coverage and find the right policy.",
+    "Have questions about car insurance? Contact the Smart Cover Auto team — we're here to help you compare coverage and find the right policy.",
   alternates: { canonical: "/contact" },
   openGraph: {
-    title: "Contact Us | SaveDriveQuotes",
+    title: "Contact Us | Smart Cover Auto",
     description:
-      "Have questions about car insurance? Contact the SaveDriveQuotes team — we're here to help.",
+      "Have questions about car insurance? Contact the Smart Cover Auto team — we're here to help.",
     url: `${SITE_URL}/contact`,
   },
   twitter: {
-    title: "Contact Us | SaveDriveQuotes",
+    title: "Contact Us | Smart Cover Auto",
     description:
-      "Have questions about car insurance? Contact the SaveDriveQuotes team — we're here to help.",
+      "Have questions about car insurance? Contact the Smart Cover Auto team — we're here to help.",
   },
 };
 

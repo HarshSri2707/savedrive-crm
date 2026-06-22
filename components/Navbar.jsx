@@ -34,9 +34,9 @@ export default function Navbar({ site }) {
             </svg>
           </span>
           <span className="text-[1.15rem] font-extrabold tracking-[-0.02em]">
-            <span className="text-white">Save</span>
-            <span className="text-[var(--teal)]">Drive</span>
-            <span className="text-white">Quotes</span>
+            <span className="text-white">Smart </span>
+            <span className="text-[var(--teal)]">Cover </span>
+            <span className="text-white">Auto</span>
           </span>
         </Link>
 

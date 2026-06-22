@@ -1,6 +1,6 @@
 {
   "site": {
-    "name": "SaveDriveQuotes",
+    "name": "Smart Cover Auto",
     "tagline": "The smarter way to compare car insurance quotes from 50+ top-rated providers."
   },
   "hero": {
@@ -8,7 +8,7 @@
     "headline1": "Find the Right Auto Insurance &",
     
     "headline2": "Unlock Savings up to $700",
-    "description": "Looking for dependable auto insurance at a competitive price? You’ve come to the right place. At SaveDriveQuotes, we help drivers explore coverage options that match their needs while identifying opportunities to save on their insurance costs.\n\nComplete the form to get started and discover coverage solutions designed to keep you protected on the road without paying more than necessary.",
+    "description": "Looking for dependable auto insurance at a competitive price? You’ve come to the right place. At Smart Cover Auto, we help drivers explore coverage options that match their needs while identifying opportunities to save on their insurance costs.\n\nComplete the form to get started and discover coverage solutions designed to keep you protected on the road without paying more than necessary.",
     "bullets": [
      "Access competitive insurance rates and potential savings",
      "Explore coverage options tailored to your unique needs",
@@ -117,7 +117,7 @@
   },
 
   "whyUs": {
-    "badge": "WHY SAVEDRIVEQUOTES",
+    "badge": "WHY SMART COVER AUTO",
     "heading": "The Smarter Way to Buy Car Insurance",
     "cards": [
       {
@@ -160,7 +160,7 @@
       },
       {
         "stars": 5,
-        "text": "Was paying way too much for years. SaveDriveQuotes showed me better options immediately. Wish I found this sooner!",
+        "text": "Was paying way too much for years. Smart Cover Auto showed me better options immediately. Wish I found this sooner!",
         "name": "James T.",
         "location": "Chicago, IL",
         "initials": "JT",
@@ -204,8 +204,8 @@
     "heading": "Frequently Asked Questions",
     "list": [
       {
-        "q": "How does SaveDriveQuotes work?",
-        "a": "SaveDriveQuotes is a free comparison marketplace. You enter your basic info once, and we instantly match you with quotes from 50+ top-rated insurers so you can compare and choose the best rate."
+        "q": "How does Smart Cover Auto work?",
+        "a": "Smart Cover Auto is a free comparison marketplace. You enter your basic info once, and we instantly match you with quotes from 50+ top-rated insurers so you can compare and choose the best rate."
       },
   
       {
@@ -237,8 +237,8 @@
       { "label": "Terms of Service", "href": "/terms" },
       { "label": "Contact", "href": "/contact" }
     ],
-    "disclosure": "SaveDriveQuotes is an independent insurance comparison marketplace and lead generation service. We are not a licensed insurance company, agent, or broker. We do not sell insurance policies directly. By submitting your information, you may be matched with one or more licensed third-party insurance providers from our partner network who will contact you about available coverage options. Quoted rates are estimates only and are not a guarantee of final pricing. Coverage terms, availability, and final rates are determined solely by the insurer.",
-    "copyright": "© 2024 SaveDriveQuotes. All rights reserved."
+    "disclosure": "Smart Cover Auto is an independent insurance comparison marketplace and lead generation service. We are not a licensed insurance company, agent, or broker. We do not sell insurance policies directly. By submitting your information, you may be matched with one or more licensed third-party insurance providers from our partner network who will contact you about available coverage options. Quoted rates are estimates only and are not a guarantee of final pricing. Coverage terms, availability, and final rates are determined solely by the insurer.",
+    "copyright": "© 2026 Smart Cover Auto. All rights reserved."
   }
  
 }

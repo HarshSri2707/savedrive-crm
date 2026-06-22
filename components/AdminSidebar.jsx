@@ -74,7 +74,7 @@ export default function AdminSidebar() {
           </svg>
         </span>
         <span className="text-white font-extrabold text-[1rem] tracking-[-0.02em] max-[768px]:hidden">
-          SaveDrive
+          Smart Cover
         </span>
       </div>
 
