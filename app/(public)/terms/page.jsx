@@ -63,7 +63,7 @@ export default function TermsOfUse() {
   };
 
   return (
-    <LegalPage title="Terms of Use" lastRevised={termsOfUseData.lastRevised}>
+    <LegalPage title="Terms of Use" >
       {termsOfUseData.sections.map((section) => (
         <div key={section.id}>
           {section.title && <h2>{section.title}</h2>}

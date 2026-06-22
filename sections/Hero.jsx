@@ -4,6 +4,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import PartnersModal from "@/components/PartnersModal";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 28 },
@@ -82,6 +83,7 @@ export default function Hero({ data, site }) {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [partnersOpen, setPartnersOpen] = useState(false);
 
   // ── ZIP -> city/state auto-lookup ──
   const [zipInfo, setZipInfo] = useState(null); // { city, state, stateCode }
@@ -229,10 +231,10 @@ export default function Hero({ data, site }) {
 
   // Trust seals shown in the "Secured By" row (assets in public/images).
   const trustBadges = [
-    { src: "/images/Secure%201.png", alt: "Comodo Secure" },
-    { src: "/images/Secure%202.png", alt: "DigiCert Secured" },
-    { src: "/images/Secure%203.png", alt: "GlobalSign SSL Secured" },
-    { src: "/images/Secure%204.png", alt: "BBB Accredited Business" },
+    { src: "/images/Secure1.png", alt: "Comodo Secure" },
+    { src: "/images/Secure2.png", alt: "DigiCert Secured" },
+    { src: "/images/Secure3.png", alt: "GlobalSign SSL Secured" },
+    { src: "/images/Secure4.png", alt: "BBB Accredited Business" },
   ];
 
   return (
@@ -270,6 +272,10 @@ export default function Hero({ data, site }) {
               <p key={i} className="[&:not(:last-child)]:mb-[0.9rem]">{para}</p>
             ))}
           </motion.div>
+
+          <motion.p className="text-white/[0.82] text-[0.9rem] font-semibold mb-[0.85rem] max-[860px]:hidden" {...fadeUp(0.34)}>
+            Why Choose {site.name}?
+          </motion.p>
 
           <motion.ul className="flex flex-col gap-[0.55rem] mb-[1.75rem] max-[860px]:hidden" {...fadeUp(0.38)}>
             {data.bullets.map((b, i) => (
@@ -310,7 +316,7 @@ export default function Hero({ data, site }) {
 
         {/* ── Right (Form) ── */}
         <motion.div
-          className="bg-white rounded-[20px] p-7 shadow-[var(--shadow-xl)] w-full max-w-[460px] ml-auto max-[860px]:max-w-[520px] max-[860px]:mx-auto max-[860px]:mt-6"
+          className="relative bg-white rounded-[20px] p-7 shadow-[var(--shadow-xl)] w-full max-w-[460px] ml-auto max-[860px]:max-w-[520px] max-[860px]:mx-auto max-[860px]:mt-6"
           id="hero-form"
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
@@ -347,6 +353,24 @@ export default function Hero({ data, site }) {
                 that could help you save on coverage. Be ready to review your
                 personalized quotes and choose the policy that fits your needs.
               </p>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setForm({ zip: "", name: "", email: "", phone: "" });
+                  setAgreed(false);
+                  setSubmitted(false);
+                  setSubmitError("");
+                  setZipInfo(null);
+                  setZipError("");
+                  setEmailError("");
+                  setEmailSuggestion(null);
+                  setEmailTouched(false);
+                }}
+                className="mt-6 inline-flex items-center justify-center gap-2 bg-[var(--orange)] text-white font-bold text-[0.92rem] py-[0.8rem] px-6 rounded-full [transition:background_0.2s,transform_0.15s] hover:bg-[var(--orange-dark)] hover:-translate-y-px"
+              >
+                Submit Another Request
+              </button>
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-[0.7rem]">
@@ -472,7 +496,11 @@ export default function Hero({ data, site }) {
                   By clicking submit, I agree to the{" "}
                   <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-[var(--teal)] underline">Terms of Service</a> and <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[var(--teal)] underline">Privacy Policy</a>.
                   I grant express written consent for SaveDriveQuotes and its{" "}
-                  <a href="#" className="text-[var(--teal)] underline">trusted third-party insurance partners</a> to contact me
+                  <a
+                    href="#"
+                    onClick={(e) => { e.preventDefault(); setPartnersOpen(true); }}
+                    className="text-[var(--teal)] underline"
+                  >trusted third-party insurance partners</a> to contact me
                   regarding my insurance request via automated or prerecorded calls,
                   SMS/text messages, and email, even if my number is on a Do Not Call
                   list. Consent is not a condition of purchase.
@@ -523,6 +551,10 @@ export default function Hero({ data, site }) {
               </div>
             </form>
           )}
+
+          {/* Partner-network panel — scoped to this form card so it reads as an
+              extended info panel of the quote form, not a site-wide popup. */}
+          <PartnersModal open={partnersOpen} onClose={() => setPartnersOpen(false)} />
         </motion.div>
 
         {/* Description — mobile position (shown after the form so order is Heading → Form → Paragraph) */}

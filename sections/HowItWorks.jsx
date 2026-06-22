@@ -95,7 +95,7 @@ export default function HowItWorks({ data }) {
   }, [cards.length]);
 
   return (
-    <section className="py-20 bg-white" id="how-it-works" ref={ref}>
+    <section className="pt-20 pb-36 bg-white" id="how-it-works" ref={ref}>
       <div className="w-full max-w-[80rem] mx-auto px-6 max-[768px]:px-4">
         {/* Heading */}
         <motion.h2

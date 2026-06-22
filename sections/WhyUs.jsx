@@ -1,3 +1,5 @@
+
+
 "use client";
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
@@ -49,7 +51,7 @@ export default function WhyUs({ data, stats, reviews }) {
   return (
     <>
       {/* ── Why Us Cards ── */}
-      <section className="pt-20 pb-12 bg-[#EFF6F6]" ref={ref}>
+      <section className="pt-20 pb-24 bg-[#EFF6F6]" ref={ref}>
         <div className="w-full max-w-[80rem] mx-auto px-6 max-[768px]:px-4">
           <motion.p
             className="block text-center text-[0.72rem] font-bold tracking-[0.1em] uppercase text-[var(--teal)] mb-2"
@@ -60,7 +62,7 @@ export default function WhyUs({ data, stats, reviews }) {
             {data.badge}
           </motion.p>
           <motion.h2
-            className="text-center text-[clamp(1.6rem,3.5vw,2.1rem)] font-extrabold text-[var(--gray-900)] tracking-[-0.02em] mb-10"
+            className="text-center  text-[clamp(1.6rem,3.5vw,2.1rem)] font-extrabold text-[var(--gray-900)] tracking-[-0.02em] mb-10"
             initial={{ opacity: 0, y: 18 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -93,7 +95,7 @@ export default function WhyUs({ data, stats, reviews }) {
       </section>
 
       {/* ── Stats Banner ── */}
-      <div className="bg-[var(--navy)] py-12">
+      <div className="bg-[var(--navy)] py-12 pt-20">
         <div className="w-full max-w-[80rem] mx-auto px-6 max-[768px]:px-4">
           <div className="grid grid-cols-3 gap-8 text-center max-[900px]:gap-6 max-[580px]:grid-cols-1">
             {stats.map((s, i) => (

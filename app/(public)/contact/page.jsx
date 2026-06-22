@@ -29,6 +29,52 @@ function renderTealHeadline(text) {
 // ── Validation helpers ──
 const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 const isValidPhone = (v) => /^\d{10}$/.test(v); // exactly 10 digits when provided
+
+// ── Email typo-suggestion (same behaviour as the Hero quote form) ──
+const POPULAR_DOMAINS = [
+  "gmail.com", "googlemail.com", "yahoo.com", "yahoo.co.in", "hotmail.com",
+  "outlook.com", "live.com", "icloud.com", "aol.com", "protonmail.com",
+  "rediffmail.com", "msn.com", "ymail.com",
+];
+
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+  for (let i = 0; i <= m; i++) dp[i][0] = i;
+  for (let j = 0; j <= n; j++) dp[0][j] = j;
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      if (a[i - 1] === b[j - 1]) dp[i][j] = dp[i - 1][j - 1];
+      else dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+    }
+  }
+  return dp[m][n];
+}
+
+// Returns a corrected email if the domain looks like a close typo of a popular
+// provider (e.g. "gmal.com" -> "gmail.com"), otherwise null.
+function getEmailSuggestion(email) {
+  const atIndex = email.lastIndexOf("@");
+  if (atIndex === -1) return null;
+  const domain = email.slice(atIndex + 1).toLowerCase().trim();
+  if (!domain) return null;
+  if (POPULAR_DOMAINS.includes(domain)) return null;
+
+  let closest = null;
+  let minDist = Infinity;
+  for (const d of POPULAR_DOMAINS) {
+    const dist = levenshtein(domain, d);
+    if (dist < minDist) {
+      minDist = dist;
+      closest = d;
+    }
+  }
+
+  if (closest && minDist > 0 && minDist <= 2) {
+    return email.slice(0, atIndex + 1) + closest;
+  }
+  return null;
+}
 const MAX_WORDS = 250;
 const countWords = (v) => {
   const t = (v || "").trim();
@@ -40,21 +86,45 @@ export default function ContactPage() {
 
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [emailError, setEmailError] = useState("");
+  const [emailSuggestion, setEmailSuggestion] = useState(null);
+  const [emailTouched, setEmailTouched] = useState(false);
   const [phoneError, setPhoneError] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleEmailChange = (e) => {
-    setForm((f) => ({ ...f, email: e.target.value }));
-    if (emailError) setEmailError("");
+  // Email handling mirrors the Hero quote form: validates shape and offers a
+  // one-click fix for likely domain typos (e.g. "gmal.com" -> "gmail.com").
+  const evaluateEmail = (value) => {
+    if (!value) {
+      setEmailError("");
+      setEmailSuggestion(null);
+      return;
+    }
+    if (!isValidEmail(value)) {
+      setEmailError("Please enter a valid email address");
+      setEmailSuggestion(null);
+      return;
+    }
+    setEmailError("");
+    setEmailSuggestion(getEmailSuggestion(value));
   };
+
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setForm((f) => ({ ...f, email: value }));
+    if (emailTouched) evaluateEmail(value);
+  };
+
   const handleEmailBlur = () => {
-    setEmailError(
-      form.email && !isValidEmail(form.email)
-        ? "Please enter a valid email address"
-        : ""
-    );
+    setEmailTouched(true);
+    evaluateEmail(form.email);
+  };
+
+  const applyEmailSuggestion = () => {
+    setForm((f) => ({ ...f, email: emailSuggestion }));
+    setEmailSuggestion(null);
+    setEmailError("");
   };
 
   // Phone: digits only, max 15.
@@ -92,10 +162,20 @@ export default function ContactPage() {
     e.preventDefault();
 
     // Final validation gate.
+    setEmailTouched(true);
     let ok = true;
     if (!isValidEmail(form.email)) {
       setEmailError("Please enter a valid email address");
+      setEmailSuggestion(null);
       ok = false;
+    } else {
+      // Valid shape but a likely domain typo — block and surface the fix.
+      const suggestion = getEmailSuggestion(form.email);
+      if (suggestion) {
+        setEmailError("");
+        setEmailSuggestion(suggestion);
+        ok = false;
+      }
     }
     if (form.phone && !isValidPhone(form.phone)) {
       setPhoneError("Please enter a valid 10-digit phone number");
@@ -227,6 +307,22 @@ export default function ContactPage() {
                   that could help you save on coverage. Be ready to review your
                   personalized quotes and choose the policy that fits your needs.
                 </p>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setForm({ name: "", email: "", phone: "", message: "" });
+                    setEmailError("");
+                    setEmailSuggestion(null);
+                    setEmailTouched(false);
+                    setPhoneError("");
+                    setError("");
+                    setSubmitted(false);
+                  }}
+                  className="mt-6 inline-flex items-center justify-center gap-2 bg-[var(--orange)] text-white font-bold text-[0.92rem] py-[0.8rem] px-6 rounded-full [transition:background_0.2s,transform_0.15s] hover:bg-[var(--orange-dark)] hover:-translate-y-px"
+                >
+                  Submit Another Request
+                </button>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-[0.85rem]">
@@ -241,13 +337,30 @@ export default function ContactPage() {
                 <div>
                   <input
                     type="email" placeholder="Email Address" required
-                    className={inputClass}
+                    className={`w-full py-[0.85rem] px-[1rem] border-[1.5px] rounded-[10px] text-[0.88rem] text-[var(--gray-800)] bg-[#FAFAFA] outline-none [transition:border-color_0.2s,box-shadow_0.2s,background_0.2s] placeholder:text-[var(--gray-400)] ${
+                      emailError || emailSuggestion
+                        ? "border-red-400 focus:border-red-400 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.12)]"
+                        : "border-[var(--gray-200)] focus:border-[var(--teal)] focus:bg-white focus:shadow-[0_0_0_3px_rgba(13,148,136,0.12)]"
+                    }`}
                     value={form.email}
                     onChange={handleEmailChange}
                     onBlur={handleEmailBlur}
                   />
                   {emailError && (
                     <p className="text-[0.72rem] text-red-500 mt-[0.3rem] ml-[0.2rem]">{emailError}</p>
+                  )}
+                  {!emailError && emailSuggestion && (
+                    <p className="text-[0.72rem] text-red-500 mt-[0.3rem] ml-[0.2rem]">
+                      Did you mean{" "}
+                      <button
+                        type="button"
+                        onClick={applyEmailSuggestion}
+                        className="underline font-semibold text-[var(--teal)] cursor-pointer"
+                      >
+                        {emailSuggestion}
+                      </button>
+                      ?
+                    </p>
                   )}
                 </div>
 

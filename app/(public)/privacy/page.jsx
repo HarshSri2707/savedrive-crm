@@ -63,7 +63,7 @@ export default function PrivacyPolicy() {
   };
 
   return (
-    <LegalPage title="Privacy Policy" lastRevised={privacyPolicyData.lastRevised}>
+    <LegalPage title="Privacy Policy" >
       {privacyPolicyData.sections.map((section) => (
         <div key={section.id}>
           {section.title && <h2>{section.title}</h2>}

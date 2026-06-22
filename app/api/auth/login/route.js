@@ -12,7 +12,10 @@ export async function POST(request) {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  const email = body?.email?.toString().trim().toLowerCase();
+  // Exact email match (case-sensitive). Only surrounding whitespace is trimmed;
+  // the case is intentionally preserved so e.g. "Admin@example.com" does NOT
+  // authenticate as "admin@example.com".
+  const email = body?.email?.toString().trim();
   const password = body?.password?.toString();
 
   if (!email || !password) {

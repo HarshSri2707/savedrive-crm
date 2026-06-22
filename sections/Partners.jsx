@@ -3,12 +3,12 @@ import { useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 
 const PARTNER_LOGOS = [
-  { src: "/images/insurance 1.png", alt: "Insurance Partner 1" },
-  { src: "/images/insurance 2.png", alt: "Insurance Partner 2" },
-  { src: "/images/insurance 3.png", alt: "Insurance Partner 3" },
-  { src: "/images/insurance 4.png", alt: "Insurance Partner 4" },
-  { src: "/images/insurance 5.png", alt: "Insurance Partner 5" },
-  { src: "/images/insurance 6.png", alt: "Insurance Partner 6" },
+  { src: "/images/insurance1.png", alt: "Insurance Partner 1" },
+  { src: "/images/insurance2.png", alt: "Insurance Partner 2" },
+  { src: "/images/insurance3.png", alt: "Insurance Partner 3" },
+  { src: "/images/insurance4.png", alt: "Insurance Partner 4" },
+  { src: "/images/insurance5.png", alt: "Insurance Partner 5" },
+  { src: "/images/insurance6.png", alt: "Insurance Partner 6" },
 ];
 
 // Render several copies so the track is always wider than the viewport and can
@@ -56,7 +56,7 @@ export default function Partners({ data }) {
   const loopLogos = Array.from({ length: COPIES }, () => PARTNER_LOGOS).flat();
 
   return (
-    <section className="py-12 max-[768px]:py-10 bg-[#EFF6F6] overflow-hidden" ref={ref}>
+    <section className="py-12 max-[768px]:py-10 bg-white overflow-hidden" ref={ref}>
       <div className="w-full max-w-[80rem] mx-auto px-6 max-[768px]:px-4">
         <motion.p
           className="block text-center text-[0.72rem] font-bold tracking-[0.1em] uppercase text-[var(--teal)] mb-2"

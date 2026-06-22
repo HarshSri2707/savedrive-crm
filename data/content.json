@@ -29,7 +29,7 @@
         { "name": "email", "placeholder": "Email Address", "type": "email" },
         { "name": "phone", "placeholder": "Phone Number", "type": "tel" }
       ],
-      "cta": "Compare My Quotes Free",
+      "cta": "Submit",
       "trust": "256-bit SSL Encrypted · No credit check · 100% Free",
       "partnersLabel": "COMPARING RATES FROM",
       "partners": ["Progressive", "Geico", "State Farm", "Allstate", "Liberty Mutual", "& more"]
@@ -141,7 +141,7 @@
     ]
   },
   "stats": [
-    { "value": "2M+", "label": "Drivers Compared" },
+    { "value": "2M+", "label": "Drivers Insured" },
     { "value": "$700", "label": "Average Savings" },
     { "value": "4.8★", "label": "Average Rating" }
   ],
